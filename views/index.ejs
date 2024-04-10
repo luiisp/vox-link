@@ -1,9 +1,53 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Welcome to Vox Link</title>
     <link rel='stylesheet' href='/styles/style.css' />
   </head>
-  <body>
-    <p class="bg-blue-600">Hello World</p>
+  <body class="bg-[#040508]">
+    <div class="flex justify-center items-center min-h-screen">
+        <div class="container mx-auto px-6 space-y-8 text-gray-200 md:px-12 lg:px-20">
+            <div class="text-center gap-6 md:text-left md:flex lg:items-center lg:gap-16">
+                <div class="grid grid-cols-5 grid-rows-4 gap-4 md:w-5/12 lg:w-6/12">
+                    <div class="col-span-2 row-span-2">
+                        <img src="assets/img/phone.jpg" class="w-full h-full object-cover object-top rounded-xl" width="640" height="640" alt="smartphone" loading="lazy">
+                    </div>
+                    <div class="col-span-3 row-span-3">
+                        <img src="/assets/img/meet.webp" class="w-full h-full object-cover object-top rounded-xl" width="640" height="427" alt="meet" loading="lazy">
+                    </div>
+                    <div class="col-span-2 row-span-4">
+                        <img src="/assets/img/teamwork.webp" class="rounded-full" width="640" height="640" alt="teamwork" loading="lazy">
+                    </div>
+                </div>
+                <div class="mb-6 space-y-6 md:mb-0 md:w-6/12 lg:w-6/12">
+                    <h1 class="text-4xl text-white font-extrabold md:text-5xl">Connect, communicate. <span class="text-sky-400">Vox Link</span> your <span class="text-sky-400">Real Time</span> voice.  </h1>
+                    <span class="inline-flex items-center rounded-full bg-transparent px-3 mx-1 py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10">Real Time</span>
+                    <span class="inline-flex items-center rounded-full bg-transparent px-3 mx-1 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Private</span>
+                    <span class="inline-flex items-center rounded-full bg-transparent px-3 mx-1 py-1 text-xs font-medium text-pink-700 ring-1 ring-inset ring-pink-700/10">Fast</span>
+                    <p class="text-lg font-thin">Experience the power of real-time voice communication with Vox Link. Connect instantly, converse effortlessly, and stay connected like never before!</p>
+                    <div class="flex flex-row-reverse flex-wrap justify-center gap-4 md:gap-6 md:justify-end">
+                        
+                        <button type="button" title="Start a room" class="w-full py-3 px-6 text-center rounded-xl transition hover:bg-sky-600 bg-sky-500 sm:w-max">
+                            <span class="block text-white font-bold shadow-gray-900">
+                                Start a Room
+                            </span>
+                        </button>
+                        <button type="button" title="Join a room" class="relative w-full order-first py-3 px-6 text-center rounded-xl bg-gray-100 transition hover:bg-gray-200 active:bg-gray-300 focus:bg-gray-200 sm:w-max">
+                            <span class="block text-black font-semibold">
+                                Join a room
+                            </span>
+                        </button>
+                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="text-center my-3">
+        <p class="text-white font-thin" >See the features in <a class="text-sky-500 hover:underline font-bold" href="github.com/luiisp/vox-link">Official Repository</a></p>
+        <p class="text-white font-thin">By <a class="text-sky-500  hover:underline font-bold" href="github.com/luiisp">Luiisp</a> </p>
+    </div>
+    
   </body>
 </html>
