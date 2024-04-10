@@ -1,10 +1,105 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Create a Room</title>
+    <title>Create your Vox Link Room</title>
     <link rel='stylesheet' href='/styles/style.css' />
   </head>
-  <body>
-    <p class="bg-blue-600">Hello World</p>
+  <body class="bg-[#040508]">
+<div class="flex justify-center items-center">
+<div class=" text-gray-200">
+<div class="flex items-center justify-center p-12">
+  <div class=" bg-transparent rounded-2xl">
+    <div class="p-5 text-center">
+      <div class="mb-6">
+        <label class="mb-5 block text-2xl font-semibold text-gray-100">
+          Almost There
+        </label>
+
+        <label class="mb-5 block text-xl font-thin text-gray-100">
+          We need to know a little more about your room to be created
+        </label>
+         
+        </div>
+
+
+      <div class="mb-8">
+        <label
+          class="mb-4 block text-base font-medium text-gray-100"
+        >
+          Your name
+        </label>
+        <input
+          type="name"
+          name="name"
+          id="name"
+          placeholder="Your Name"
+          class="w-full rounded-full border border-white bg-transparent py-3 px-6 text-base font-medium text-white outline-none focus:border-sky-500 focus:shadow-md"
+        />
+      </div>
+
+
+      <div class="mb-8">
+        <label
+          class="mb-4 block text-base font-medium text-gray-100"
+        >
+          Room Name
+        </label>
+        <input
+          name="room-name"
+          id="room-name"
+          placeholder="Room Name"
+          class="w-full rounded-full border border-white bg-transparent py-3 px-6 text-base font-medium text-white outline-none focus:border-sky-500 focus:shadow-md"
+        />
+      </div>
+
+      <div class="mb-8">
+        <label class="mb-4 block text-base font-medium text-gray-100">
+            Maximum people in the room
+        </label>
+        <div class="px-6 w-full">
+            <input type="range" min="1" max="5" value="3" class="bg-gray-700 h-2 w-full rounded-full relative" id="people-range">
+            <div class="flex justify-between mt-2 text-xs text-gray-300">
+                <span class="w-8 text-left">2</span>
+                <span class="w-8 text-center">4</span>
+                <span class="w-8 text-center">6</span>
+                <span class="w-8 text-center">8</span>
+                <span class="w-8 text-right">10</span>
+            </div>
+        </div>
+    </div>
+    
+
+
+
+      <label class="mb-5 block text-sm font-thin text-gray-100">
+        By creating the room you agree to Vox Links terms of use and service
+      </label>
+      <div>
+        <button
+          class="hover:shadow-form w-full rounded-xl bg-sky-500 py-3 px-8 text-center text-base font-semibold text-white outline-none"
+        >
+          Start the Room
+        </button>
+        <label class="my-4 block text-2xl font-extrabold text-gray-100">
+          Or
+        </label>
+        <button
+        class="hover:shadow-form w-full rounded-xl bg-transparent border border-sky-500 py-3 px-8 text-center text-base font-semibold text-sky-500 outline-none"
+      >
+        Cancel and Join a Room
+      </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+            </div>
+        </div>
+    </div>
+    <div class="text-center my-3">
+        <p class="text-white font-thin" >See the source code in <a class="text-sky-500 hover:underline font-bold" href="github.com/luiisp/vox-link">Official Repository</a></p>
+        <p class="text-white font-thin">By <a class="text-sky-500  hover:underline font-bold" href="github.com/luiisp">Luiisp</a> </p>
+    </div>
+    
   </body>
 </html>
