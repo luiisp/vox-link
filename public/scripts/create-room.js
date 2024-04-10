@@ -5,11 +5,30 @@ const personRangeInput = document.getElementById('people-range');
 const createRoomBtn = document.getElementById('create-room-btn');
 const fields = document.getElementById('fields');
 const orOptions = document.getElementById('or-options');
+const numLegends = document.getElementById('num-legends');
 
-personRangeInput.addEventListener("input", () => {
-    let value = this.value;
-    console.log(value);
-});
+const createLegend = (e) => {
+    let span = document.createElement('span');
+    span.textContent = e;
+    span.style.textAlign = 'center';
+    numLegends.appendChild(span);
+}
+
+const syncSettings = () => {
+    personRangeInput.min = 1;
+    personRangeInput.max = personRangeNums.length;
+    personRangeInput.value = personRangeNums.length/2;
+
+
+    personRangeNums.forEach(e => {
+        createLegend(e);
+
+    });
+    
+}
+
+syncSettings();
+
 
 const changeLoadingState = (state) => {
     if (state == true){
@@ -47,7 +66,7 @@ const verifyRoomCredentials = () => {
     console.warn('Verifying room credentials');
     const name = nameInput.value;
     const roomName = roomNameInput.value;
-    const personRange = personRangeInput.value;
+    const personRange = personRangeNums[personRangeInput.value -1];
     if(name === '' || roomName === ''){
         error('All fields are required');
         return;
@@ -61,13 +80,18 @@ const verifyRoomCredentials = () => {
         return;
     }else if (name == roomName){
         error('Name and Room Name cannot be the same');
+        return;}
+    else if (personRange == undefined){
+        error('Invalid person range selected');
         return;
-    
     }
     changeLoadingState(true);
-    setTimeout(() => {
-        changeLoadingState(false);
-    }, 2000);
+    let room = {
+        name: name,
+        roomName: roomName,
+        personRange: personRange
+    }
+    console.info('Room:', room);
 
     
   

@@ -12,12 +12,11 @@ app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-    console.log(settings);
     res.render('index'); 
 });
 
 app.get('/create-room', (req, res) => {
-    res.render('create'); 
+    res.render('create', {"settings":publicSettings}); 
 });
 
 app.get('/room', (req, res) => {

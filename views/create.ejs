@@ -71,13 +71,8 @@
             Maximum people in the room
         </label>
         <div class="px-6 w-full">
-            <input type="range" min="1" max="5" value="3" class="bg-gray-700 h-2 w-full rounded-full relative" id="people-range">
-            <div class="flex justify-between mt-2 text-xs text-gray-300">
-                <span class="w-8 text-left">2</span>
-                <span class="w-8 text-center">4</span>
-                <span class="w-8 text-center">6</span>
-                <span class="w-8 text-center">8</span>
-                <span class="w-8 text-right">10</span>
+            <input type="range" class="bg-gray-700 h-2 w-full rounded-full relative" id="people-range">
+            <div id="num-legends" class="flex justify-between mt-2 text-xs text-gray-300">
             </div>
         </div>
     </div>
@@ -117,7 +112,17 @@
     <div class="text-center my-3">
         <p class="text-white font-thin" >See the source code in <a class="text-sky-500 hover:underline font-bold" href="github.com/luiisp/vox-link">Official Repository</a></p>
         <p class="text-white font-thin">By <a class="text-sky-500  hover:underline font-bold" href="github.com/luiisp">Luiisp</a> </p>
-    </div>
+      </div>
+
     
+    <script>
+    const peoplePerRoomString = "<%= settings.peoplePerRoom %>";
+    const personRangeNums = peoplePerRoomString.split(',').map(item => {
+    return parseInt(item.trim(), 10);
+   
+});
+
+
+    </script>
   </body>
 </html>
