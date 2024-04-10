@@ -4,58 +4,14 @@
     <title>Create your Vox Link Room</title>
     <link rel='stylesheet' href='/styles/style.css' />
     <link rel="stylesheet" href="/styles/anims.css">
-    <script defer src="/scripts/create-room.js"></script>
   </head>
   <body class="bg-[#040508]">
     
-    <div id="error-bar" style="display: none; position: fixed; top: 0; left: 0; width: 100%;" class="w-full bg-sky-500 z-30 text-center py-2">
+    <div id="error-bar" style="display: none; position: fixed; top: 0; left: 0; width: 100%;" class="w-full bg-sky-500 text-center py-2">
       <span class=" text-black font-bold">Error</span>
   </div>
+
   
-  <div id="join-room" style="display: none;" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80">
-    <div class="bg-[#040508] border border-sky-500 p-10 text-center rounded-xl shadow-lg">
-      <label class="mb-5 block text-2xl font-semibold text-gray-100">
-        Join a Room
-      </label>
-
-      <label class="mb-5 block text-md font-thin text-gray-100">
-        To join a room you will need a room ID or an Room link
-      </label>
-      <div class="mb-8">
-        <label
-          class="mb-4 block text-base font-medium text-gray-100"
-        >
-          Room Link or Room ID
-        </label>
-        <input
-          autocomplete="off"
-          autocapitalize="off"
-          id="join-room-id"
-          placeholder="Room Link or Room ID"
-          class="w-full rounded-full border border-white bg-transparent py-3 px-6 text-base font-medium text-white outline-none focus:border-sky-500 focus:shadow-md"
-        />
-      </div>
-
-      <div>
-        <button
-          class="hover:shadow-form flex justify-center gap-3 items-center w-full rounded-xl bg-sky-500 py-3 px-8 text-center text-base font-semibold text-white outline-none"
-        >
-
-        Join Room
-        </button>
-          <label class="my-4 block text-2xl text-center font-extrabold text-gray-100">
-            Or
-          </label>
-          <button
-          class="hover:shadow-form w-full rounded-xl bg-transparent border border-sky-500 py-3 px-8 text-center text-base font-semibold text-sky-500 outline-none"
-          id="exit-join-room"
-          >
-          Cancel
-        </button>
-        </div>
-    </div>
-
-</div>
   
 <div class="flex justify-center items-center">
   
@@ -116,7 +72,7 @@
             Maximum people in the room
         </label>
         <div class="px-6 w-full">
-            <input type="range" class="bg-gray-700 outline-none h-2 w-full rounded-full " id="people-range">
+            <input type="range" class="bg-gray-700 outline-none h-2 w-full rounded-full relative" id="people-range">
             <div id="num-legends" class="flex justify-between mt-2 text-xs text-gray-300">
             </div>
         </div>
@@ -142,8 +98,7 @@
           </label>
           <button
           class="hover:shadow-form w-full rounded-xl bg-transparent border border-sky-500 py-3 px-8 text-center text-base font-semibold text-sky-500 outline-none"
-          id="join-room-btn"
-          >
+        >
           Cancel and Join a Room
         </button>
         </div>
@@ -161,14 +116,6 @@
       </div>
 
     
-    <script>
-    const peoplePerRoomString = "<%= settings.peoplePerRoom %>";
-    const personRangeNums = peoplePerRoomString.split(',').map(item => {
-    return parseInt(item.trim(), 10);
-   
-});
-
-
-    </script>
+  
   </body>
 </html>
