@@ -56,9 +56,6 @@ const changeLoadingState = (state) => {
         });
     }
 }
-
-
-
 const error = (errorMessage) => {
     errorDiv.classList.remove('slide-in-from-top', 'slide-in-from-top-reverse');
 
@@ -75,8 +72,6 @@ const error = (errorMessage) => {
         }, 600);
     }, 2500); 
 };
-
-
 const verifyRoomCredentials = () => {
     console.warn('Verifying room credentials');
     const name = nameInput.value;
