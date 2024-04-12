@@ -11,6 +11,7 @@ const joinDiv = document.getElementById('join-room');
 const popupBtnExit = document.getElementById('exit-join-room');
 
 
+
 const createLegend = (e) => {
     let span = document.createElement('span');
     span.textContent = e;
@@ -40,20 +41,12 @@ const changeLoadingState = (state) => {
         orOptions.classList.add('disabled');
         createRoomBtn.style.cursor = 'not-allowed';
         createRoomBtn.style.pointerEvents = 'none';
-        window.addEventListener("beforeunload", function(event) {
-            event.preventDefault();
-            event.returnValue = "Are you sure you want to leave? You will lose your room creation progress.";
-        });
     }else{
         createRoomBtn.innerHTML = 'Create Room';
         fields.classList.remove('disabled');
         orOptions.classList.remove('disabled');
         createRoomBtn.style.cursor = 'pointer';
         createRoomBtn.style.pointerEvents = 'all';
-        window.removeEventListener("beforeunload", function(event) {
-            event.preventDefault();
-            event.returnValue = "Are you sure you want to leave? You will lose your room creation progress.";
-        });
     }
 }
 const error = (errorMessage) => {
@@ -97,11 +90,33 @@ const verifyRoomCredentials = () => {
     }
     changeLoadingState(true);
     let room = {
-        name: name,
+        creatorName: name,
         roomName: roomName,
         personRange: personRange
     }
     console.info('Room:', room);
+
+    fetch('/i/create-room', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(room)
+    }).then(res => res.json())
+    .then(data => {
+        console.log(data);
+        if(data.error){
+            error(data.error);
+            changeLoadingState(false);
+        }else{
+            console.log(data.info);
+            window.location.href = '/room';
+        }
+    }).catch(err => {
+        console.error(err);
+        error('An error occurred, please try again');
+        changeLoadingState(false);
+    });
 }
 
 

@@ -7,115 +7,63 @@
   </head>
   <body class="bg-[#040508]">
     
-    <div id="error-bar" style="display: none; position: fixed; top: 0; left: 0; width: 100%;" class="w-full bg-sky-500 text-center py-2">
-      <span class=" text-black font-bold">Error</span>
-  </div>
-
-  
-  
-<div class="flex justify-center items-center">
-  
-<div class=" text-gray-200">
-<div class="flex items-center justify-center p-12">
-  <div class=" bg-transparent rounded-2xl">
-    <div class="p-5 text-center">
-      <div class="mb-6">
+   
+      <div class="bg-[#040508] fixed border border-sky-500 p-10 text-center rounded-xl shadow-lg">
         <label class="mb-5 block text-2xl font-semibold text-gray-100">
-          Almost There
+          Join a Room
         </label>
-
-        <label class="mb-5 block text-xl font-thin text-gray-100">
-          We need to know a little more about your room to be created
+  
+        <label class="mb-5 block text-md font-thin text-gray-100">
+          To join a room you will need a room ID or an Room link
         </label>
-         
+        <div class="mb-8">
+          <label
+            class="mb-4 block text-base font-medium text-gray-100"
+          >
+            Room Link or Room ID
+          </label>
+          <input
+            autocomplete="off"
+            autocapitalize="off"
+            id="join-room-id"
+            placeholder="Room Link or Room ID"
+            class="w-full rounded-full border border-white bg-transparent py-3 px-6 text-base font-medium text-white outline-none focus:border-sky-500 focus:shadow-md"
+          />
         </div>
+  
+        <div>
+          <button
+            class="hover:shadow-form flex justify-center gap-3 items-center w-full rounded-xl bg-sky-500 py-3 px-8 text-center text-base font-semibold text-white outline-none"
+          >
+  
+          Join Room
+          </button>
+            <label class="my-4 block text-2xl text-center font-extrabold text-gray-100">
+              Or
+            </label>
+            <button
+            class="hover:shadow-form w-full rounded-xl bg-transparent border border-sky-500 py-3 px-8 text-center text-base font-semibold text-sky-500 outline-none"
+            id="exit-join-room"
+            >
+            Cancel
+          </button>
+          </div>
+      </div>
+  
 
-      <div id="fields">
+    <div class="min-h-screen flex justify-center items-center">
+      <div class="grid grid-cols-3 gap-4 px-8">
+        <div style="border: 1px solid rgb(255, 255, 255);" class=" bg-[#080a10] rounded-lg py-10 px-28 flex flex-col items-center justify-center shadow-md">
+          <img style="border: 1.5px solid rgb(255, 255, 255);" src="/assets/img/default_user.jpeg" alt="Avatar" class="rounded-full w-20 h-full mb-4">
+          <h2 class="text-2xl font-bold mb-2 text-white">Username</h2>
+      </div>
+
+
 
       
-      <div class="mb-8">
-        <label
-          class="mb-4 block text-base font-medium text-gray-100"
-        >
-          Your name
-        </label>
-        <input
-          type="name"
-          name="name"
-          autocomplete="off"
-          autocapitalize="off"
-          id="name"
-          placeholder="Your Name"
-          class="w-full rounded-full border border-white bg-transparent py-3 px-6 text-base font-medium text-white outline-none focus:border-sky-500 focus:shadow-md"
-        />
+
       </div>
-
-
-      <div class="mb-8">
-        <label
-          class="mb-4 block text-base font-medium text-gray-100"
-        >
-          Room Name
-        </label>
-        <input
-          name="room-name"
-          id="room-name"
-          autocomplete="off"
-          autocapitalize="off"
-          placeholder="Room Name"
-          class="w-full rounded-full border border-white bg-transparent py-3 px-6 text-base font-medium text-white outline-none focus:border-sky-500 focus:shadow-md"
-        />
-      </div>
-
-      <div class="mb-8">
-        <label class="mb-4 block text-base font-medium text-gray-100">
-            Maximum people in the room
-        </label>
-        <div class="px-6 w-full">
-            <input type="range" class="bg-gray-700 outline-none h-2 w-full rounded-full relative" id="people-range">
-            <div id="num-legends" class="flex justify-between mt-2 text-xs text-gray-300">
-            </div>
-        </div>
-    </div>
-    
-
   </div>
-
-      <label class="mb-5 block text-sm font-thin text-gray-100">
-        By creating the room you agree to Vox Links terms of use and service
-      </label>
-      <div>
-        <button
-          id="create-room-btn"
-          class="hover:shadow-form flex justify-center gap-3 items-center w-full rounded-xl bg-sky-500 py-3 px-8 text-center text-base font-semibold text-white outline-none"
-        >
-
-        Start the Room
-        </button>
-        <div id="or-options">
-          <label class="my-4 block text-2xl font-extrabold text-gray-100">
-            Or
-          </label>
-          <button
-          class="hover:shadow-form w-full rounded-xl bg-transparent border border-sky-500 py-3 px-8 text-center text-base font-semibold text-sky-500 outline-none"
-        >
-          Cancel and Join a Room
-        </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-            </div>
-        </div>
-    </div>
-    <div class="text-center my-3">
-        <p class="text-white font-thin" >See the source code in <a class="text-sky-500 hover:underline font-bold" href="github.com/luiisp/vox-link">Official Repository</a></p>
-        <p class="text-white font-thin">By <a class="text-sky-500  hover:underline font-bold" href="github.com/luiisp">Luiisp</a> </p>
-      </div>
-
-    
   
   </body>
 </html>
