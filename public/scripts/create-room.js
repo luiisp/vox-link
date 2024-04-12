@@ -106,11 +106,12 @@ const verifyRoomCredentials = () => {
     .then(data => {
         console.log(data);
         if(data.error){
+            console.error(data.error);
             error(data.error);
             changeLoadingState(false);
         }else{
             console.log(data.info);
-            window.location.href = '/room';
+            window.location.href = data.roomPath;
         }
     }).catch(err => {
         console.error(err);

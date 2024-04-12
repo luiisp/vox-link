@@ -18,16 +18,21 @@ const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 const rooms = new Map();
 
-const roomAdd = (create,uuid) => {
-    if (create) {
-        app.get(`/room/${uuid}`, (req, res) => {
-
-            res.render('room')
-        
-        });
-        
+const roomRouteAdd = (uuid,roomSchema) => {
+    app.get(`/room/${uuid}`, (req, res) => {
+        res.render('room', {room: roomSchema})
+    });
+    return true;
+};
+const roomRouteRemove = (uuid) => {
+    let rPath = `/room/${uuid}`; 
+    const routeIndex = app._router.stack.findIndex(layer => layer.route && layer.route.path === rPath);
+    if (routeIndex === -1) {
+        app._router.stack.splice(routeIndex, 1);
+        return true;
     }
-
+    console.error('Route not found');
+    return false;
 };
 
 
@@ -66,15 +71,20 @@ app.post('/i/create-room', (req, res) => {
 
     const roomId = "r-" + uuid.v4();
     rooms.set(roomId, roomSchema);
+    let addRoom = roomRouteAdd(roomId, roomSchema);
+
+    if (!addRoom) {
+        res.send(JSON.stringify({error: 'An error occurred in room creation, please try again'}));
+        return;
+    }
 
 
 
-
-
-
-    console.log('Room credentials:', roomCredentials);
     res.send(JSON.stringify({
-
+        info: 'Room created successfully',
+        roomId: roomId,
+        roomPath: `/room/${roomId}`,
+        creator: roomSchema.creator,
 
     }));
 
