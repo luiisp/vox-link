@@ -1,6 +1,6 @@
 {
     "publicSettings":{
-        "peoplePerRoom" : [2, 4, 8, 16, 32]
+        "peoplePerRoom" : [2, 4, 6, 8, 16]
 
     }
     
