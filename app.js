@@ -23,18 +23,21 @@ const rooms = new Map();
 const a = "test";
 
 app.get(`/room/:uuid`, (req, res) => {
-    const roomId = req.params.uuid;
+    const room = rooms.get(req.params.uuid);
+    if (!room){
+        res.status(404).render('room-not-found');
+        return;
+    }
+    console.log(room);
     const fakeSchema = {
         creator: 'Test',
         roomName: 'Test Room',
-        personRange: '1-4'
-    }
-    if (roomId == a){
+        personRange: '1-4'}
+
         res.render('room', {room: fakeSchema})
         return;
-    }
-    res.status(404).render('room-not-found');
-    
+
+
 });
 
 
@@ -68,7 +71,8 @@ app.post('/i/create-room', (req, res) => {
     const roomSchema = {
         creator: roomCredentials.creatorName,
         roomName: roomCredentials.roomName,
-        personRange: roomCredentials.personRange
+        personRange: roomCredentials.personRange,
+        connectedUsers: []
     };
 
     const roomId = "r-" + uuid.v4();
