@@ -14,26 +14,28 @@ app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
+
+
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 const rooms = new Map();
 
-const roomRouteAdd = (uuid,roomSchema) => {
-    app.get(`/room/${uuid}`, (req, res) => {
-        res.render('room', {room: roomSchema})
-    });
-    return true;
-};
-const roomRouteRemove = (uuid) => {
-    let rPath = `/room/${uuid}`; 
-    const routeIndex = app._router.stack.findIndex(layer => layer.route && layer.route.path === rPath);
-    if (routeIndex === -1) {
-        app._router.stack.splice(routeIndex, 1);
-        return true;
+const a = "test";
+
+app.get(`/room/:uuid`, (req, res) => {
+    const roomId = req.params.uuid;
+    const fakeSchema = {
+        creator: 'Test',
+        roomName: 'Test Room',
+        personRange: '1-4'
     }
-    console.error('Route not found');
-    return false;
-};
+    if (roomId == a){
+        res.render('room', {room: fakeSchema})
+        return;
+    }
+    res.status(404).render('room-not-found');
+    
+});
 
 
 wss.on('connection', (ws) => {
@@ -71,13 +73,6 @@ app.post('/i/create-room', (req, res) => {
 
     const roomId = "r-" + uuid.v4();
     rooms.set(roomId, roomSchema);
-    let addRoom = roomRouteAdd(roomId, roomSchema);
-
-    if (!addRoom) {
-        res.send(JSON.stringify({error: 'An error occurred in room creation, please try again'}));
-        return;
-    }
-
 
 
     res.send(JSON.stringify({
@@ -96,7 +91,9 @@ app.get('/create-room', (req, res) => {
 });
 
 
-
+app.use((req, res, next) => {
+    res.status(404).render('404');
+});
 
 const port = 3000;
 server.listen(port, () => {
