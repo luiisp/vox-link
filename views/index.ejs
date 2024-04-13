@@ -1,101 +1,67 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to Vox Link</title>
     <link rel='stylesheet' href='/styles/style.css' />
     <script defer src="/scripts/home.js"></script>
-  </head>
-  <body class="bg-[#040508]">
+</head>
 
-
-
+<body  class="bg-[#040508] text-gray-200">
     <div id="join-room" style="display: none;" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80">
-        <div class="bg-[#040508] border border-sky-500 p-10 text-center rounded-xl shadow-lg">
-          <label class="mb-5 block text-2xl font-semibold text-gray-100">
-            Join a Room
-          </label>
-    
-          <label class="mb-5 block text-md font-thin text-gray-100">
-            To join a room you will need a room ID or an Room link
-          </label>
-          <div class="mb-8">
-            <label
-              class="mb-4 block text-base font-medium text-gray-100"
-            >
-              Room Link or Room ID
-            </label>
-            <input
-              autocomplete="off"
-              autocapitalize="off"
-              id="join-room-id"
-              placeholder="Room Link or Room ID"
-              class="w-full rounded-full border border-white bg-transparent py-3 px-6 text-base font-medium text-white outline-none focus:border-sky-500 focus:shadow-md"
-            />
-          </div>
-    
-          <div>
-            <button
-              class="hover:shadow-form flex justify-center gap-3 items-center w-full rounded-xl bg-sky-500 py-3 px-8 text-center text-base font-semibold text-white outline-none"
-            >
-    
-            Join Room
-            </button>
-              <label class="my-4 block text-2xl text-center font-extrabold text-gray-100">
-                Or
-              </label>
-              <button
-              class="hover:shadow-form w-full rounded-xl bg-transparent border border-sky-500 py-3 px-8 text-center text-base font-semibold text-sky-500 outline-none"
-              id="exit-join-room"
-              >
-              Cancel
-            </button>
+        <div class="bg-[#040508] border border-sky-500 p-6 sm:p-10 text-center rounded-xl shadow-lg max-w-lg mx-auto">
+            <label class="mb-5 block text-xl sm:text-2xl font-semibold"> Join a Room </label>
+            <label class="mb-5 block text-sm sm:text-md font-thin"> To join a room you will need a room ID or an Room link </label>
+            <div class="mb-8">
+                <label class="mb-4 block text-sm sm:text-base font-medium"> Room Link or Room ID </label>
+                <input type="text" id="join-room-id" placeholder="Room Link or Room ID" class="w-full rounded-full border border-white bg-transparent py-2 sm:py-3 px-4 sm:px-6 text-sm sm:text-base font-medium text-white outline-none focus:border-sky-500 focus:shadow-md" />
+            </div>
+            <div>
+                <button class="hover:shadow-form flex justify-center gap-3 items-center w-full rounded-xl bg-sky-500 py-2 sm:py-3 px-4 sm:px-8 text-sm sm:text-base font-semibold text-white outline-none"> Join Room </button>
+                <label class="my-4 block text-xl sm:text-2xl text-center font-extrabold"> Or </label>
+                <button class="hover:shadow-form w-full rounded-xl bg-transparent border border-sky-500 py-2 sm:py-3 px-4 sm:px-8 text-sm sm:text-base font-semibold text-sky-500 outline-none" id="exit-join-room"> Cancel </button>
             </div>
         </div>
     </div>
-
 
     <div class="flex justify-center items-center min-h-screen">
-        <div class="container mx-auto px-6 space-y-8 text-gray-200 md:px-12 lg:px-20">
-            <div class="text-center gap-6 md:text-left md:flex lg:items-center lg:gap-16">
-                <div class="grid grid-cols-5 grid-rows-4 gap-4 md:w-5/12 lg:w-6/12">
-                    <div class="col-span-2 row-span-2">
-                        <img src="assets/img/phone.jpg" class="w-full h-full object-cover object-top rounded-xl" width="640" height="640" alt="smartphone" loading="lazy">
-                    </div>
-                    <div class="col-span-3 row-span-3">
-                        <img src="/assets/img/meet.webp" class="w-full h-full object-cover object-top rounded-xl" width="640" height="427" alt="meet" loading="lazy">
-                    </div>
-                    <div class="col-span-2 row-span-4">
-                        <img src="/assets/img/teamwork.webp" class="rounded-full" width="640" height="640" alt="teamwork" loading="lazy">
-                    </div>
-                </div>
-                <div class="mb-6 space-y-6 md:mb-0 md:w-6/12 lg:w-6/12">
-                    <h1 class="text-4xl text-white font-extrabold md:text-5xl">Connect, communicate. <span class="text-sky-400">Vox Link</span> your <span class="text-sky-400">Real Time</span> voice.  </h1>
-                    <span class="inline-flex items-center rounded-full bg-transparent px-3 mx-1 py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10">Real Time</span>
-                    <span class="inline-flex items-center rounded-full bg-transparent px-3 mx-1 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Private</span>
-                    <span class="inline-flex items-center rounded-full bg-transparent px-3 mx-1 py-1 text-xs font-medium text-pink-700 ring-1 ring-inset ring-pink-700/10">Fast</span>
-                    <p class="text-lg font-thin">Experience the power of real-time voice communication with Vox Link. Connect instantly, converse effortlessly, and stay connected like never before!</p>
-                    <div class="flex flex-row-reverse flex-wrap justify-center gap-4 md:gap-6 md:justify-end">
-                        
-                        <button type="button" title="Start a room" class="w-full py-3 px-6 text-center rounded-xl transition hover:bg-sky-600 bg-sky-500 sm:w-max" id="start-room">
-                            <span class="block text-white font-bold shadow-gray-900">
-                                Start a Room
-                            </span>
-                        </button>
-                        <button id="join-room-btn" type="button" title="Join a room" class=" w-full order-first py-3 px-6 text-center rounded-xl bg-gray-100 transition hover:bg-gray-200 active:bg-gray-300 focus:bg-gray-200 sm:w-max">
-                            <span class="block text-black font-semibold">
-                                Join a room
-                            </span>
-                        </button>
-                        
-                    </div>
-                </div>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-20 space-y-8">
 
+            <div class="text-center  gap-6 md:text-left md:flex lg:items-center lg:gap-16">
+                <div class="grid grid-cols-1 sm:grid-cols-5 sm:grid-rows-4 gap-4 md:w-5/12 lg:w-6/12">
+                    <div class="hidden md:block sm:col-span-2 sm:row-span-2">
+                        <img src="assets/img/phone.jpg" class="w-full h-full  object-cover object-top rounded-xl" alt="smartphone" loading="lazy">
+                    </div>
+                    <div class="hidden md:block  sm:col-span-3 sm:row-span-3">
+                        <img src="/assets/img/meet.webp" class="w-full h-full object-cover object-top rounded-xl" alt="meet" loading="lazy">
+                    </div>
+                    <div class="hidden md:block  sm:col-span-2 sm:row-span-4">
+                        <img src="/assets/img/teamwork.webp" class="rounded-full w-full h-full" alt="teamwork" loading="lazy">
+                    </div>
+                </div>
+                <div class="space-y-6 md:w-6/12 lg:w-6/12">
+                    <h1 class="text-2xl sm:text-4xl font-extrabold leading-tight"> Connect, communicate. <span class="text-sky-400">Vox Link</span> your <span class="text-sky-400">Real Time</span> voice. </h1>
+                    <div class="flex flex-wrap justify-center sm:justify-start  gap-2">
+                        <span class="inline-flex items-center rounded-full bg-transparent px-3 py-1 text-xs font-medium border border-indigo-500 text-indigo-500">Real Time</span>
+                        <span class="inline-flex items-center rounded-full bg-transparent px-3 py-1 text-xs font-medium border border-emerald-500 text-emerald-500">Private</span>
+                        <span class="inline-flex items-center rounded-full bg-transparent px-3 py-1 text-xs font-medium border border-rose-500 text-rose-500">Fast</span>
+                    </div>
+                    <p class="text-sm sm:text-lg font-thin"> Experience the power of real-time voice communication with Vox Link. Connect instantly, converse effortlessly, and stay connected like never before! </p>
+                    <div class="flex flex-col sm:flex-row-reverse justify-center sm:justify-end gap-4">
+                        <button type="button" title="Start a room" id="start-room" class="w-full sm:w-auto py-3 px-6 text-center rounded-xl transition hover:bg-sky-600 bg-sky-500"> <span class="block text-white font-bold"> Start a Room </span> </button>
+                        <button id="join-room-btn" type="button" title="Join a room" class="w-full sm:w-auto order-first py-3 px-6 text-center rounded-xl bg-gray-100 transition hover:bg-gray-200 active:bg-gray-300"> <span class="block text-black font-semibold"> Join a room </span> </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
     <div class="text-center my-3">
-        <p class="text-white font-thin" >See the features in <a class="text-sky-500 hover:underline font-bold" href="//github.com/luiisp/vox-link">Official Repository</a></p>
-        <p class="text-white font-thin"><a class="text-sky-500 hover:underline font-bold" href="/">Vox Link</a> By <a class="text-sky-500  hover:underline font-bold" href="//github.com/luiisp">Luiisp</a> </p>
+        <p>See the features in <a class="text-sky-500 hover:underline font-bold" href="//github.com/luiisp/vox-link">Official Repository</a></p>
+        <p><a class="text-sky-500 hover:underline font-bold" href="/">Vox Link</a> By <a class="text-sky-500 hover:underline font-bold" href="//github.com/luiisp">Luiisp</a></p>
     </div>
-  </body>
+</body>
+
 </html>

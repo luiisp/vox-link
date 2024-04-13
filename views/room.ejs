@@ -1,67 +1,74 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= room.roomName %> - Vox Link Room</title>
-    <link rel='stylesheet' href='/styles/style.css' />
+    <link rel="stylesheet" href="/styles/style.css" />
     <link rel="stylesheet" href="/styles/anims.css">
-  </head>
-  <body class="bg-[#040508]">
-      <div class="bg-[#040508] fixed border border-sky-500 p-10 text-center rounded-xl shadow-lg">
-        <label class="mb-5 block text-2xl font-semibold text-gray-100">
-          Join a Room
+</head>
+<body class="bg-[#040508]">
+  <div id="btns" style="pointer-events: none;" class="fixed inset-0 flex items-center justify-center ">
+    <div class="z-40 absolute bg-transparent flex items-center justify-center bottom-16  w-full  mx-32 text-center">
+      
+      <div>
+
+        <label class="text-md font-semibold rounded-full shadow-[#080a10] text-gray-100">
+          Connected As <span class="text-sky-500">Username</span>
         </label>
+
+        <div class="flex m-4 justify-center items-center gap-4">
+
+
+          <button style="pointer-events: all;" class="bg-amber-400 rounded-full shadow-lg p-3 shadow-[#080a10] ">
+            <svg clip-rule="evenodd" fill="#080a10" fill-rule="evenodd" width="24" height="24" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12 16.495c1.242 0 2.25 1.008 2.25 2.25s-1.008 2.25-2.25 2.25-2.25-1.008-2.25-2.25 1.008-2.25 2.25-2.25zm0-6.75c1.242 0 2.25 1.008 2.25 2.25s-1.008 2.25-2.25 2.25-2.25-1.008-2.25-2.25 1.008-2.25 2.25-2.25zm0-6.75c1.242 0 2.25 1.008 2.25 2.25s-1.008 2.25-2.25 2.25-2.25-1.008-2.25-2.25 1.008-2.25 2.25-2.25z"/></svg>
+          </button>
+
+          <button style="pointer-events: all;"  class="bg-sky-600 rounded-full shadow-lg p-3 shadow-[#080a10] ">
+            <svg width="24" height="24" fill="#080a10" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M7.5 21c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5-1.5-.672-1.5-1.5.672-1.5 1.5-1.5zm9 0c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5-1.5-.672-1.5-1.5.672-1.5 1.5-1.5zm-4.5 0c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5-1.5-.672-1.5-1.5.672-1.5 1.5-1.5zm8-12v2c0 4.418-3.582 8-8 8s-8-3.582-8-8v-2h2v2c0 3.309 2.691 6 6 6s6-2.691 6-6v-2h2zm-4 2c0 2.209-1.791 4-4 4s-4-1.791-4-4v-7c0-2.209 1.791-4 4-4s4 1.791 4 4v7z"/></svg>
+          </button>
+
+          <button style="pointer-events: all;" class="bg-rose-600 rounded-full shadow-lg p-3 shadow-[#080a10] ">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="#FFF" width="24" height="24" viewBox="0 0 24 24"><path d="M20 22.621l-3.521-6.795c-.008.004-1.974.97-2.064 1.011-2.24 1.086-6.799-7.82-4.609-8.994l2.083-1.026-3.493-6.817-2.106 1.039c-7.202 3.755 4.233 25.982 11.6 22.615.121-.055 2.102-1.029 2.11-1.033z"/></svg>
+          </button>
   
-        <label class="mb-5 block text-md font-thin text-gray-100">
-          To join a room you will need a room ID or an Room link
-        </label>
-        <div class="mb-8">
-          <label
-            class="mb-4 block text-base font-medium text-gray-100"
-          >
-            Room Link or Room ID
-          </label>
-          <input
-            autocomplete="off"
-            autocapitalize="off"
-            id="join-room-id"
-            placeholder="Room Link or Room ID"
-            class="w-full rounded-full border border-white bg-transparent py-3 px-6 text-base font-medium text-white outline-none focus:border-sky-500 focus:shadow-md"
-          />
         </div>
   
-        <div>
-          <button
-            class="hover:shadow-form flex justify-center gap-3 items-center w-full rounded-xl bg-sky-500 py-3 px-8 text-center text-base font-semibold text-white outline-none"
-          >
-  
-          Join Room
-          </button>
-            <label class="my-4 block text-2xl text-center font-extrabold text-gray-100">
-              Or
-            </label>
-            <button
-            class="hover:shadow-form w-full rounded-xl bg-transparent border border-sky-500 py-3 px-8 text-center text-base font-semibold text-sky-500 outline-none"
-            id="exit-join-room"
-            >
-            Cancel
-          </button>
-          </div>
       </div>
-  
+
+
+
+
+    </div>
+
+
+
+</div>
+
+
+
 
     <div class="min-h-screen flex justify-center items-center">
-      <div class="grid grid-cols-3 gap-4 px-8">
-        <div style="border: 1px solid rgb(255, 255, 255);" class=" bg-[#080a10] rounded-lg py-10 px-28 flex flex-col items-center justify-center shadow-md">
-          <img style="border: 1.5px solid rgb(255, 255, 255);" src="/assets/img/default_user.jpeg" alt="Avatar" class="rounded-full w-20 h-full mb-4">
-          <h2 class="text-2xl font-bold mb-2 text-white">Username</h2>
-      </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 p-8">
+            <!-- User profile 1 -->
+            <div class="user bg-[#080a10] rounded-xl py-10 px-4 sm:px-28 flex flex-col items-center justify-center shadow-[#080a10] shadow-xl">
+                <img src="/assets/img/default_user.jpeg" alt="Avatar" class="rounded-full w-20 h-full mb-4">
+                <h2 class="text-2xl font-bold mb-2 text-white">Username</h2>
+            </div>
+            <!-- User profile 2 -->
+            <div class="user bg-[#080a10] rounded-xl py-10 px-4 sm:px-28 flex flex-col items-center justify-center shadow-[#080a10] shadow-xl">
+              <img src="/assets/img/default_user.jpeg" alt="Avatar" class="rounded-full w-20 h-full mb-4">
+              <h2 class="text-2xl font-bold mb-2 text-white">Username</h2>
+          </div>
 
 
+          <div class="user bg-[#080a10] rounded-xl py-10 px-4 sm:px-28 flex flex-col items-center justify-center shadow-[#080a10] shadow-xl">
+            <img src="/assets/img/default_user.jpeg" alt="Avatar" class="rounded-full w-20 h-full mb-4">
+            <h2 class="text-2xl font-bold mb-2 text-white">Username</h2>
+        </div>
 
-      
 
-      </div>
-  </div>
-  
-  </body>
+        </div>
+    </div>
+</body>
 </html>

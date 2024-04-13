@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.user{
+    transition: transform ease-in-out 0.3s;
+}
+
+.user:hover{
+    transform: scale(1.03);
+
+}
+
+#btns{
+    background: linear-gradient(to top, #040508 10%,transparent 40%,transparent 60%, transparent 100%);
+    
+}
