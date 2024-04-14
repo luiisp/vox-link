@@ -6,9 +6,46 @@
     <title><%= room.roomName %> - Vox Link Room</title>
     <link rel="stylesheet" href="/styles/style.css" />
     <link rel="stylesheet" href="/styles/anims.css">
-    <script src="/scripts/room.js" ></script>
+    <script defer src="/scripts/room-context.js" ></script>
 </head>
 <body class="bg-[#040508]">
+
+  <div id="error-bar" class="hidden fixed top-0 left-0 right-0 z-50 bg-sky-500 text-center py-2">
+    <span class="text-black font-bold">Error</span>
+</div>
+
+  <div class="fixed inset-0 z-40 flex items-center justify-center bg-black">
+
+    <div style="display: none;" id="loader" class="flex flex-col items-center justify-center p-8 md:p-10 gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" viewBox="0 0 24 24">
+        <path fill="#0EA5E9" d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" />
+        <path fill="currentColor" d="M12,4a8,8,0,0,1,7.89,6.7A1.53,1.53,0,0,0,21.38,12h0a1.5,1.5,0,0,0,1.48-1.75,11,11,0,0,0-21.72,0A1.5,1.5,0,0,0,2.62,12h0a1.53,1.53,0,0,0,1.49-1.3A8,8,0,0,1,12,4Z">
+          <animateTransform attributeName="transform" dur="0.45s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12" />
+        </path>
+      </svg>
+      <label id="loader-text" class="block text-2xl font-bold mb-2 text-sky-500">Joining the room</label>
+    </div>
+    
+    
+    <div id="display-name-div" class="p-8 md:p-10 text-center rounded-xl">
+        <label class="block text-2xl font-semibold mb-2 text-gray-100">Welcome To <%= room.roomName %> :D</label>
+        <label class="block text-md font-bold mb-2 text-sky-400">Room Created by <%= room.creator %> </label>
+        <label class="block text-md font-thin mb-4 text-gray-100">To enter the room you need to provide a displayed name</label>
+        <div class="mb-8">
+            <label class="block text-base font-medium mb-4 text-gray-100">Display Name</label>
+            <input autocomplete="off" type="text" id="display-name" placeholder="Display Name"
+                class="w-full rounded-full border border-white bg-transparent py-3 px-6 text-base font-medium text-white outline-none focus:border-sky-500 focus:shadow-md">
+        </div>
+        <button id="join-room-btn" class="w-full rounded-xl bg-sky-500 py-3 px-8 text-base font-semibold text-white outline-none hover:shadow-md">Join Room</button>
+        <div>
+            <label class="block text-2xl my-4 font-extrabold text-gray-100">Or</label>
+            <button onclick="location.href='/'" class="w-full rounded-xl bg-transparent border border-sky-500 py-3 px-8 text-base font-semibold text-sky-500 outline-none">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+
   <div id="btns" style="pointer-events: none;" class="fixed inset-0 flex items-center justify-center ">
     <div class="z-40 absolute bg-transparent flex items-center justify-center bottom-16  w-full  mx-32 text-center">
       
@@ -71,5 +108,6 @@
 
         </div>
     </div>
+    <script src="/socket.io/socket.io.js"></script>
 </body>
 </html>

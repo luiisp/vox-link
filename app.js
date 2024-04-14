@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const WebSocket = require('socket.io');
+const { Server } = require("socket.io");
 const http = require('http');
 const app = express();
 const settings = require('./settings.json');
@@ -17,10 +17,9 @@ app.use(express.json());
 
 
 const server = http.createServer(app);
-const wss = new WebSocket.Server({ server });
+const io = new Server(server);
 const rooms = new Map();
 
-const a = "test";
 
 app.get(`/room/:uuid`, (req, res) => {
     const room = rooms.get(req.params.uuid);
@@ -28,32 +27,26 @@ app.get(`/room/:uuid`, (req, res) => {
         res.status(404).render('room-not-found');
         return;
     }
-    console.log(room);
-    const fakeSchema = {
-        creator: 'Test',
-        roomName: 'Test Room',
-        personRange: '1-4'}
 
-        res.render('room', {room: fakeSchema})
+        res.render('room', {room: room})
         return;
 
 
 });
 
 
-wss.on('connection', (ws) => {
-    console.log('Client connected');
+io.on('connection', (socket) => {
+    console.log('Client Connected');
 
+    socket.on('startCall', (roomId) => {
+        console.log('Client Start Call');
+        socket.broadcast.to(roomId).emit('audioStream');
+    });
 
-    ws.on('message', (message) => {
-      console.log(` message: ${message}`);
-      ws.send(message);
+    socket.on('disconnect', () => {
+        console.log('Client disconnected');
     });
-  
-    ws.on('close', () => {
-      console.log(' disconnected');
-    });
-  });
+});
   
 
 app.get('/', (req, res) => {
