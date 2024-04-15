@@ -52,7 +52,7 @@
       <div>
 
         <label class="text-md font-semibold rounded-full shadow-[#080a10] text-gray-100">
-          Connected As <span class="text-sky-500">Username</span>
+          Connected As <span id="y-display-name" class="text-sky-500">Username</span>
         </label>
 
         <div class="flex m-4 justify-center items-center gap-4">
@@ -62,8 +62,8 @@
             <svg clip-rule="evenodd" fill="#080a10" fill-rule="evenodd" width="24" height="24" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12 16.495c1.242 0 2.25 1.008 2.25 2.25s-1.008 2.25-2.25 2.25-2.25-1.008-2.25-2.25 1.008-2.25 2.25-2.25zm0-6.75c1.242 0 2.25 1.008 2.25 2.25s-1.008 2.25-2.25 2.25-2.25-1.008-2.25-2.25 1.008-2.25 2.25-2.25zm0-6.75c1.242 0 2.25 1.008 2.25 2.25s-1.008 2.25-2.25 2.25-2.25-1.008-2.25-2.25 1.008-2.25 2.25-2.25z"/></svg>
           </button>
 
-          <button style="pointer-events: all;"  class="bg-sky-600 rounded-full shadow-lg p-3 shadow-[#080a10] ">
-            <svg width="24" height="24" fill="#080a10" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M7.5 21c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5-1.5-.672-1.5-1.5.672-1.5 1.5-1.5zm9 0c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5-1.5-.672-1.5-1.5.672-1.5 1.5-1.5zm-4.5 0c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5-1.5-.672-1.5-1.5.672-1.5 1.5-1.5zm8-12v2c0 4.418-3.582 8-8 8s-8-3.582-8-8v-2h2v2c0 3.309 2.691 6 6 6s6-2.691 6-6v-2h2zm-4 2c0 2.209-1.791 4-4 4s-4-1.791-4-4v-7c0-2.209 1.791-4 4-4s4 1.791 4 4v7z"/></svg>
+          <button id="mute-btn" style="pointer-events: all;"  class="bg-sky-600 rounded-full shadow-lg p-3 shadow-[#080a10] ">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="#080a10" width="24" height="24" fill-rule="evenodd" clip-rule="evenodd"><path d="M7.5 21c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5-1.5-.672-1.5-1.5.672-1.5 1.5-1.5zm9 0c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5-1.5-.672-1.5-1.5.672-1.5 1.5-1.5zm-4.5 0c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5-1.5-.672-1.5-1.5.672-1.5 1.5-1.5zm8-12v2c0 4.418-3.582 8-8 8s-8-3.582-8-8v-2h2v2c0 3.309 2.691 6 6 6s6-2.691 6-6v-2h2zm-4 2c0 2.209-1.791 4-4 4s-4-1.791-4-4v-7c0-2.209 1.791-4 4-4s4 1.791 4 4v7z"/></svg>
           </button>
 
           <button style="pointer-events: all;" class="bg-rose-600 rounded-full shadow-lg p-3 shadow-[#080a10] ">
@@ -88,8 +88,6 @@
 
     <div class="min-h-screen flex justify-center items-center">
         <div id="grid-a-users" class="grid grid-cols-1 md:grid-cols-3 gap-8 p-8">
-
-
         </div>
     </div>
     <script  src="/socket.io/socket.io.js"></script>

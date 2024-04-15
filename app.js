@@ -38,17 +38,26 @@ app.get(`/room/:uuid`, (req, res) => {
 
 io.on("connection", (socket) => {
   console.log("Client Connected");
+  let userObj = undefined
+  let roomId = undefined
 
-  socket.on("join-room", (roomId,userID) => {
+  socket.on("join-room", (roomId,userObj) => {
     console.log("Client joined room");
+    if (!rooms.has(roomId)) {
+      console.log("Room not found");
+      return;
+    }
+    userObj = userObj
+    roomId = roomId
     socket.join(roomId);
-    socket.to(roomId).emit("user-connected", userID);
+    socket.to(roomId).emit("user-connected", userObj);
 
    // socket.broadcast.to(roomId).emit("audioStream");
   });
 
   socket.on("disconnect", () => {
-    console.log("Client disconnected");
+    console.log("Client disconnected", userObj);
+    socket.to(roomId).emit("user-disconnected", userObj);
   });
 });
 

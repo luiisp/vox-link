@@ -6,6 +6,7 @@ const displayNameDiv = document.getElementById("display-name-div");
 const errorDiv = document.getElementById("error-bar");
 const infosDiv = document.getElementById("info-div");
 const gridAUsers = document.getElementById("grid-a-users");
+const muteBtn = document.getElementById("mute-btn");
 let myStream = null;
 
 const error = (errorMessage) => {
@@ -68,24 +69,27 @@ const loading = (text = null, load) => {
   }
 };
 
-function playAudio() {
-  var audio = new Audio();
-  audio.src = '/join.mp3';
-  audio.play();
-}
 
-
-function handlerShowStream(stream, destroy = false) {
+function handlerShowStream(stream, userObj = undefined,audio=false, destroy = false) {
   console.log("Stream Received:", stream);
-  playAudio();
-  spawnUserCard(displayName.value);
+  if (audio){
+    audio.srcObject = stream;
+    audio.addEventListener('loadedmetadata', () => {
+    audio.play();
+  });
+  }
+  playSound('join');
+  spawnUserCard(userObj && userObj.username ? userObj.username : "You");
 }
 
-function connectToNewUser(userId, stream) {
+
+function connectToNewUser(userObj, stream) {
+  const userId = userObj.id;
+  let audio = document.createElement('audio');
   const call = myPeer.call(userId, stream);
 
   call.on("stream", (userStream) => {
-    handlerShowStream(userStream);
+    handlerShowStream(userStream,userObj,audio=audio);
   });
 
   call.on("close", () => {
@@ -117,7 +121,11 @@ const init = async () => {
     });
   myPeer.on("open", (id) => {
     console.log("Connected to Peer Server");
-    socket.emit("join-room", roomID, id);
+    userObj = {
+      username: displayName.value,
+      id: id,
+    }
+    socket.emit("join-room", roomID,userObj);
   });
   myPeer.on("disconnect", (id) => {
     console.log("Disconnect to Peer Server");
@@ -127,12 +135,16 @@ const init = async () => {
     console.log("Connected to Server");
   });
 
-  socket.on("user-connected", (userID,userObj) => {
-    console.log("New User Connected:", userID);
-    connectToNewUser(userID, myStream);
+
+  socket.on("user-connected", (userObj) => {
+    console.log("New User Connected:", userObj);
+    connectToNewUser(userObj, myStream);
   });
 
+
+
   socket.on("user-disconnected", (userId) => {
+      console.log("User Disconnected:", userId);
     if (peers[userId]) peers[userId].close();
   });
 };
@@ -148,9 +160,65 @@ const joinBtnVal = () => {
   joinRoomBtn.removeEventListener("click", joinBtnVal);
   displayNameDiv.style.display = "none";
   displayNameDiv.remove();
+  window.addEventListener("beforeunload", (event) => {
+    event.preventDefault();
+    event.returnValue = "";
+  });
+  addListeners();
   loading((text = "Connecting"), (load = true));
+  document.getElementById("y-display-name").textContent = displayName.value;
   init();
 };
+
+const playSound = (type) => {
+  const dirs = {
+    'join': '../assets/audio/join.mp3',
+    'leave': '../assets/audio/leave.mp3',
+    'mute': '../assets/audio/mute.mp3',
+  }
+  switch (type) {
+    case 'join':
+      var audio = new Audio(dirs.join);
+      audio.play();
+      break;
+    case 'leave':
+      var audio = new Audio(dirs.leave);
+      audio.play();
+      break;
+    case 'mute':
+      var audio = new Audio(dirs.mute);
+      audio.play();
+      break;
+  }
+
+
+}
+
+
+const muteUnmute = () => {
+  const icons = [
+    `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#080a10" fill-rule="evenodd" clip-rule="evenodd">
+    <path d="M7.5 21c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5-1.5-.672-1.5-1.5.672-1.5 1.5-1.5zm9 0c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5-1.5-.672-1.5-1.5.672-1.5 1.5-1.5zm-4.5 0c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5-1.5-.672-1.5-1.5.672-1.5 1.5-1.5zm8-12v2c0 4.418-3.582 8-8 8s-8-3.582-8-8v-2h2v2c0 3.309 2.691 6 6 6s6-2.691 6-6v-2h2zm-4 2c0 2.209-1.791 4-4 4s-4-1.791-4-4v-7c0-2.209 1.791-4 4-4s4 1.791 4 4v7z"/>
+    <path d="M2.5 1.5 L21.5 18.5" stroke="#080a10" stroke-width="3.5" /> 
+</svg>`,`
+<svg xmlns="http://www.w3.org/2000/svg" fill="#080a10" width="24" height="24" fill-rule="evenodd" clip-rule="evenodd"><path d="M7.5 21c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5-1.5-.672-1.5-1.5.672-1.5 1.5-1.5zm9 0c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5-1.5-.672-1.5-1.5.672-1.5 1.5-1.5zm-4.5 0c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5-1.5-.672-1.5-1.5.672-1.5 1.5-1.5zm8-12v2c0 4.418-3.582 8-8 8s-8-3.582-8-8v-2h2v2c0 3.309 2.691 6 6 6s6-2.691 6-6v-2h2zm-4 2c0 2.209-1.791 4-4 4s-4-1.791-4-4v-7c0-2.209 1.791-4 4-4s4 1.791 4 4v7z"/></svg>
+`
+  ]
+  const enabled = myStream.getAudioTracks()[0].enabled;
+  if (enabled) {
+    myStream.getAudioTracks()[0].enabled = false;
+    muteBtn.innerHTML = icons[0];
+  } else {
+    myStream.getAudioTracks()[0].enabled = true;
+    muteBtn.innerHTML = icons[1];
+  }
+  playSound('mute');
+}
+
+function addListeners() {
+
+  muteBtn.addEventListener("click", muteUnmute);
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   joinRoomBtn.addEventListener("click", joinBtnVal);
