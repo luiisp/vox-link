@@ -14,7 +14,7 @@
     <span class="text-black font-bold">Error</span>
 </div>
 
-  <div class="fixed inset-0 z-40 flex items-center justify-center bg-black">
+  <div id="info-div" class="fixed inset-0 z-40 flex items-center justify-center bg-black">
 
     <div style="display: none;" id="loader" class="flex flex-col items-center justify-center p-8 md:p-10 gap-2">
       <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" viewBox="0 0 24 24">
@@ -87,27 +87,16 @@
 
 
     <div class="min-h-screen flex justify-center items-center">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 p-8">
-
-            <div class="user bg-[#080a10] rounded-xl py-10 px-4 sm:px-28 flex flex-col items-center justify-center shadow-[#080a10] shadow-xl">
-                <img src="/assets/img/default_user.jpeg" alt="Avatar" class="rounded-full w-20 h-full mb-4">
-                <h2 class="text-2xl font-bold mb-2 text-white">Username</h2>
-            </div>
-
-            <div class="user bg-[#080a10] rounded-xl py-10 px-4 sm:px-28 flex flex-col items-center justify-center shadow-[#080a10] shadow-xl">
-              <img src="/assets/img/default_user.jpeg" alt="Avatar" class="rounded-full w-20 h-full mb-4">
-              <h2 class="text-2xl font-bold mb-2 text-white">Username</h2>
-          </div>
-
-
-          <div class="user bg-[#080a10] rounded-xl py-10 px-4 sm:px-28 flex flex-col items-center justify-center shadow-[#080a10] shadow-xl">
-            <img src="/assets/img/default_user.jpeg" alt="Avatar" class="rounded-full w-20 h-full mb-4">
-            <h2 class="text-2xl font-bold mb-2 text-white">Username</h2>
-        </div>
+        <div id="grid-a-users" class="grid grid-cols-1 md:grid-cols-3 gap-8 p-8">
 
 
         </div>
     </div>
-    <script src="/socket.io/socket.io.js"></script>
+    <script  src="/socket.io/socket.io.js"></script>
+    <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+    <script>
+        const roomID = "<%= roomID %>";
+        console.log(roomID);
+    </script>
 </body>
 </html>

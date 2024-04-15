@@ -1,6 +1,11 @@
 {
   "name": "voxlink",
   "version": "0.0.0",
+  "description": "A Voice chat application",
+  "author": {
+    "name": "luiisp",
+    "email": "luisp.diias@gmail.com"
+  },
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
@@ -15,6 +20,7 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
+    "peer": "^1.0.2",
     "postcss": "^8.4.38",
     "postcss-cli": "^11.0.0",
     "socket.io": "^4.7.5",
