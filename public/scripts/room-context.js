@@ -29,9 +29,10 @@ const error = (errorMessage) => {
 const spawnUserCard = (username) => {
   const userDiv = document.createElement("div");
   userDiv.classList.add(
+    "unoff",
     "user",
-    "bg-[#0f121c]",
-    "rounded-md",
+    "bg-[#040508]",
+    "rounded-lg",
     "py-10",
     "px-4",
     "sm:px-28",
@@ -116,14 +117,14 @@ const init = async () => {
   oldConnUsers = [];
   myPeer = new Peer();
   var socket = io("/");
+  loading((text = "Try Get Stream"), (load = true));
   navigator.mediaDevices
     .getUserMedia({
       audio: true,
     })
     .then((stream) => {
       myStream = stream;
-      infosDiv.style.display = "none";
-      loading((text = "Detected Stream"), (load = false));
+      loading((text = "Connecting"), (load = true));
       handlerShowStream(myStream);
       myPeer.on("call", (call) => {
         call.answer(stream);
@@ -144,10 +145,13 @@ const init = async () => {
       id: id,
       StreamId: myStream.id,
     };
+    loading((text = "Connected"), (load = false));
+    infosDiv.style.display = "none";
     socket.emit("join-room", roomID, userObj);
   });
   myPeer.on("disconnect", (id) => {
     console.log("Disconnect to Peer Server");
+    socket.emit("disconnect", roomID);
   });
 
   socket.on("room-credentials", (roomUsers) => {
@@ -158,6 +162,14 @@ const init = async () => {
 
   socket.on("connect", () => {
     console.log("Connected to Server");
+  });
+
+  socket.on("room-full", (roomComp) => {
+    error("Sorry, Room is Full");
+    document.getElementById('full-div').style.display = "";
+    document.getElementById('full-count').innerHTML = `${roomComp}`;
+    infosDiv.style.display = "";
+    socket.disconnect();
   });
 
   socket.on("user-connected", (userObj) => {

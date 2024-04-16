@@ -45,6 +45,11 @@ io.on("connection", (socket) => {
       console.log("Room not found");
       return;
     }
+    if (rooms.get(roomId).roomUsers.length >= rooms.get(roomId).personRange) {
+      io.to(socket.id).emit("room-full", roomComp=`${rooms.get(roomId).roomUsers.length}/${rooms.get(roomId).personRange}`);
+      return;
+    }
+
 
 
 

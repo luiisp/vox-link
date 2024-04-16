@@ -8,13 +8,34 @@
     <link rel="stylesheet" href="/styles/anims.css">
     <script defer src="/scripts/room-context.js" ></script>
 </head>
-<body class="bg-[#040508]">
+<body class="bg-[#010203]">
 
   <div id="error-bar" class="hidden fixed top-0 left-0 right-0 z-50 bg-sky-500 text-center py-2">
     <span class="text-black font-bold">Error</span>
 </div>
 
   <div id="info-div" class="fixed inset-0 z-40 flex items-center justify-center bg-black">
+
+
+    <div style="display: none;" id="full-div" class="p-8 md:p-10 text-center rounded-xl">
+      <label class="block text-4xl font-semibold mb-2 text-gray-100">Full room <span id="full-count"
+              class="text-red-500"></span></label>
+      <label class="block text-xl font-thin mb-4 text-gray-100">You almost managed to get into the room but
+          unfortunately it is full at the moment
+      </label>
+
+      <button onclick="location.href='/create-room'"
+          class="w-full rounded-xl bg-sky-500 py-3 px-8 text-base font-semibold text-white outline-none hover:shadow-md">Exit
+          and Create your Room</button>
+      <div>
+          <label class="block text-2xl my-4 font-extrabold text-gray-100">Or</label>
+          <button onclick="location.reload()"
+              class="w-full rounded-xl bg-transparent border border-sky-500 py-3 px-8 text-base font-semibold text-sky-500 outline-none">Try
+              Join Again</button>
+      </div>
+  </div>
+
+
 
     <div style="display: none;" id="loader" class="flex flex-col items-center justify-center p-8 md:p-10 gap-2">
       <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" viewBox="0 0 24 24">
@@ -88,6 +109,7 @@
 
     <div class="min-h-screen flex justify-center items-center">
         <div id="grid-a-users" class="grid grid-cols-1 md:grid-cols-3 gap-8 p-8">
+        <!--  <div class="user bg-[#040508] rounded-lg py-10 px-4 sm:px-28 flex flex-col items-center justify-center shadow-[#080a10] shadow-sm"><img src="/assets/img/default_user.jpeg" alt="You Avatar" class="rounded-full w-20 h-full mb-4"><h2 class="text-2xl font-bold mb-2 text-white">You</h2></div>--> 
         </div>
     </div>
     <script  src="/socket.io/socket.io.js"></script>
