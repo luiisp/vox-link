@@ -32,32 +32,37 @@ app.get(`/room/:uuid`, (req, res) => {
     return;
   }
 
-  res.render("room", { room: room, roomID: req.params.uuid});
+  res.render("room", { room: room, roomID: req.params.uuid });
   return;
 });
 
 io.on("connection", (socket) => {
   console.log("Client Connected");
-  let userObj = undefined
-  let roomId = undefined
 
-  socket.on("join-room", (roomId,userObj) => {
-    console.log("Client joined room");
+  socket.on("join-room", (roomId, userObj) => {
+    console.log("Client joined room",userObj, roomId);
     if (!rooms.has(roomId)) {
       console.log("Room not found");
       return;
     }
-    userObj = userObj
-    roomId = roomId
+
+
+
+    
+
+
+
     socket.join(roomId);
+    io.to(socket.id).emit("room-credentials", rooms.get(roomId).roomUsers);
+    rooms.get(roomId).roomUsers.push(userObj);
     socket.to(roomId).emit("user-connected", userObj);
 
-   // socket.broadcast.to(roomId).emit("audioStream");
+    // socket.broadcast.to(roomId).emit("audioStream");
   });
 
-  socket.on("disconnect", () => {
-    console.log("Client disconnected", userObj);
-    socket.to(roomId).emit("user-disconnected", userObj);
+  socket.on("disconnect", (roomId) => {
+    console.log("Client disconnected",roomId);
+    socket.to(roomId).emit("user-disconnected");
   });
 });
 
@@ -77,6 +82,7 @@ app.post("/i/create-room", (req, res) => {
     creator: roomCredentials.creatorName,
     roomName: roomCredentials.roomName,
     personRange: roomCredentials.personRange,
+    roomUsers: [],
   };
 
   const roomId = "r-" + uuid.v4();
