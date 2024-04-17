@@ -17,12 +17,13 @@ const joinRoom = () => {
   if (roomID.length < 8) {
     return;
   }
-  if (roomID.includes('/')){
-    window.location.href = `/room/${roomID.split('/')[roomID.split('/').length-1]}`;
-  }else{
+  if (roomID.includes("/")) {
+    window.location.href = `/room/${
+      roomID.split("/")[roomID.split("/").length - 1]
+    }`;
+  } else {
     window.location.href = `/room/${roomID}`;
   }
-  
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -33,5 +34,3 @@ document.addEventListener("DOMContentLoaded", () => {
   popupBtnExit.addEventListener("click", openPopupJoin);
   entryRoomLink.addEventListener("click", joinRoom);
 });
-
-

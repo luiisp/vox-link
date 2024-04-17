@@ -210,12 +210,10 @@ const ExitRoom = () => {
       id: myPeer.id,
     },
     roomID
-    
   );
   document.getElementById("exit-div").style.display = "";
   infosDiv.style.display = "";
-  exited = true
-
+  exited = true;
 };
 
 const playSound = (type) => {
@@ -268,17 +266,19 @@ function addListeners() {
 
 document.addEventListener("DOMContentLoaded", () => {
   joinRoomBtn.addEventListener("click", joinBtnVal);
-  const queryString = window.location.search
+  const queryString = window.location.search;
   const regex = /\?fastentryuser=([^&]+)/;
   const match = regex.exec(queryString);
   if (match && match[1]) {
-      const fastEntryUserValue = decodeURIComponent(match[1]);
-      displayName.value = fastEntryUserValue;
-      const newQueryString = queryString.replace(/(\?|&)fastentryuser=[^&]+/, '');
-      const newUrl = window.location.pathname + (newQueryString.length > 0 ? '?' + newQueryString : '') + window.location.hash;
-      history.replaceState(null, '', newUrl);
-      loading((text = "Verifying Credentials.."), (load = true));
-      joinBtnVal();
-      
-  } 
+    const fastEntryUserValue = decodeURIComponent(match[1]);
+    displayName.value = fastEntryUserValue;
+    const newQueryString = queryString.replace(/(\?|&)fastentryuser=[^&]+/, "");
+    const newUrl =
+      window.location.pathname +
+      (newQueryString.length > 0 ? "?" + newQueryString : "") +
+      window.location.hash;
+    history.replaceState(null, "", newUrl);
+    loading((text = "Verifying Credentials.."), (load = true));
+    joinBtnVal();
+  }
 });
