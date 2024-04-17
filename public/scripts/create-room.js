@@ -124,7 +124,7 @@ const verifyRoomCredentials = () => {
             changeLoadingState(false);
         }else{
             console.log(data.info);
-            window.location.href = data.roomPath;
+            window.location.href = data.roomPath+"?fastentryuser="+name;
         }
     }).catch(err => {
         console.error(err);

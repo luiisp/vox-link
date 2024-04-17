@@ -66,9 +66,12 @@ io.on("connection", (socket) => {
       console.log("Room not found");
       return;
     }
-    const index = actualRoom.roomUsers.findIndex(user => user.id === UserObj.id);
-    actualRoom.roomUsers.splice(index, 1);
+    const index = actualRoom.roomUsers.findIndex(user => user.streamId == UserObj.streamId);
+    actualRoom.roomUsers.splice(index,1);
     socket.to(roomId).emit("user-disconnected", UserObj);
+    if (actualRoom.roomUsers.length == 0) {
+      rooms.delete(roomId);
+    }
   });
 });
 

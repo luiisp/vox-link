@@ -8,6 +8,7 @@ const infosDiv = document.getElementById("info-div");
 const gridAUsers = document.getElementById("grid-a-users");
 const muteBtn = document.getElementById("mute-btn");
 let myStream = undefined;
+let exited = false;
 
 const error = (errorMessage) => {
   errorDiv.classList.remove("slide-in-from-top", "slide-in-from-top-reverse");
@@ -113,7 +114,7 @@ const init = async () => {
   oldConnUsers = [];
   myPeer = new Peer();
   socket = io("/");
-  loading((text = "Try Get Stream"), (load = true));
+  loading((text = "Waiting for User media.."), (load = true));
   navigator.mediaDevices
     .getUserMedia({
       audio: true,
@@ -200,6 +201,7 @@ const joinBtnVal = () => {
 };
 
 const ExitRoom = () => {
+  if (exited) return;
   socket.emit(
     "user-disconnect",
     {
@@ -208,9 +210,12 @@ const ExitRoom = () => {
       id: myPeer.id,
     },
     roomID
+    
   );
   document.getElementById("exit-div").style.display = "";
   infosDiv.style.display = "";
+  exited = true
+
 };
 
 const playSound = (type) => {
@@ -263,4 +268,17 @@ function addListeners() {
 
 document.addEventListener("DOMContentLoaded", () => {
   joinRoomBtn.addEventListener("click", joinBtnVal);
+  const queryString = window.location.search
+  const regex = /\?fastentryuser=([^&]+)/;
+  const match = regex.exec(queryString);
+  if (match && match[1]) {
+      const fastEntryUserValue = decodeURIComponent(match[1]);
+      displayName.value = fastEntryUserValue;
+      const newQueryString = queryString.replace(/(\?|&)fastentryuser=[^&]+/, '');
+      const newUrl = window.location.pathname + (newQueryString.length > 0 ? '?' + newQueryString : '') + window.location.hash;
+      history.replaceState(null, '', newUrl);
+      loading((text = "Verifying Credentials.."), (load = true));
+      joinBtnVal();
+      
+  } 
 });
