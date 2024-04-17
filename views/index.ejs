@@ -16,10 +16,10 @@
             <label class="mb-5 block text-sm sm:text-md font-thin"> To join a room you will need a room ID or an Room link </label>
             <div class="mb-8">
                 <label class="mb-4 block text-sm sm:text-base font-medium"> Room Link or Room ID </label>
-                <input type="text" id="join-room-id" placeholder="Room Link or Room ID" class="w-full rounded-full border border-white bg-transparent py-2 sm:py-3 px-4 sm:px-6 text-sm sm:text-base font-medium text-white outline-none focus:border-sky-500 focus:shadow-md" />
+                <input autocomplete="off" type="text" id="join-room-id" placeholder="Room Link or Room ID" class="w-full rounded-full border border-white bg-transparent py-2 sm:py-3 px-4 sm:px-6 text-sm sm:text-base font-medium text-white outline-none focus:border-sky-500 focus:shadow-md" />
             </div>
             <div>
-                <button class="hover:shadow-form flex justify-center gap-3 items-center w-full rounded-xl bg-sky-500 py-2 sm:py-3 px-4 sm:px-8 text-sm sm:text-base font-semibold text-white outline-none"> Join Room </button>
+                <button id="entry-room-link" class="hover:shadow-form flex justify-center gap-3 items-center w-full rounded-xl bg-sky-500 py-2 sm:py-3 px-4 sm:px-8 text-sm sm:text-base font-semibold text-white outline-none"> Join Room </button>
                 <label class="my-4 block text-xl sm:text-2xl text-center font-extrabold"> Or </label>
                 <button class="hover:shadow-form w-full rounded-xl bg-transparent border border-sky-500 py-2 sm:py-3 px-4 sm:px-8 text-sm sm:text-base font-semibold text-sky-500 outline-none" id="exit-join-room"> Cancel </button>
             </div>

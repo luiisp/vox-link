@@ -70,11 +70,7 @@ const loading = (text = null, load) => {
   }
 };
 
-function handlerShowStream(
-  stream,
-  userObj = undefined,
-  audio = false
-) {
+function handlerShowStream(stream, userObj = undefined, audio = false) {
   console.log("old conns:", oldConnUsers);
   console.log("Handler Show Stream:", stream);
   if (audio) {
@@ -172,13 +168,13 @@ const init = async () => {
   });
 
   socket.on("user-connected", (userObj) => {
-    console.log("New User Connected:", userObj)
+    console.log("New User Connected:", userObj);
     playSound("join");
     connectToNewUser(userObj, myStream);
   });
 
   socket.on("user-disconnected", (userObj) => {
-    let pUser = document.getElementById(`user-${userObj.streamId}`)
+    let pUser = document.getElementById(`user-${userObj.streamId}`);
     if (pUser) pUser.remove();
     if (peers[userObj.id]) peers[userObj.id].close();
     playSound("leave");

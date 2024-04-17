@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/styles/style.css" />
     <link rel="stylesheet" href="/styles/anims.css">
     <script defer src="/scripts/room-context.js" ></script>
+    <script defer src="/scripts/utils.js"></script>
 </head>
 <body class="bg-[#010203]">
 
@@ -14,10 +15,21 @@
     <span class="text-black font-bold">Error</span>
 </div>
 
+
+<div class="fixed z-30 top-0 text-center left-0 m-6 p-3">
+  <span id="actual-hour" class="text-sky-500 font-thin text-4xl block">15:60</span>
+  <span class="text-white font-thin block">Created at <%= room.createdAt %></span>
+</div>
+
+
+
+
+
+
   <div id="info-div" class="fixed inset-0 z-40 flex items-center justify-center bg-black">
-
-
-
+    
+    
+    
     <div style="display: none;" id="exit-div" class="p-8 md:p-10 text-center rounded-xl">
       <label class="block text-4xl font-semibold mb-2 text-gray-100">You <span
               class="text-red-500">Left</span> the Room</label>

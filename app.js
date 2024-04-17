@@ -84,10 +84,14 @@ app.post("/i/create-room", (req, res) => {
     return;
   }
 
+  const currentDate = new Date();
+  const hour = currentDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const date = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
   const roomSchema = {
     creator: roomCredentials.creatorName,
     roomName: roomCredentials.roomName,
     personRange: roomCredentials.personRange,
+    createdAt: `${hour}  ${date}`,
     roomUsers: [],
   };
 
