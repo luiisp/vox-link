@@ -214,6 +214,7 @@ const ExitRoom = () => {
   document.getElementById("exit-div").style.display = "";
   infosDiv.style.display = "";
   exited = true;
+  myPeer.destroy();
 };
 
 const playSound = (type) => {
