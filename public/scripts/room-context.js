@@ -83,7 +83,6 @@ function handlerShowStream(
       audio.play();
     });
   }
-  playSound("join");
   if (!userObj && oldConnUsers != {}) {
     console.log("dont have userObj");
     let streamId = stream.id;
@@ -147,6 +146,7 @@ const init = async () => {
       streamId: myStream.id,
     };
     loading((text = "Connected"), (load = false));
+    playSound("join");
     infosDiv.style.display = "none";
     socket.emit("join-room", roomID, userObj);
   });
@@ -172,16 +172,16 @@ const init = async () => {
   });
 
   socket.on("user-connected", (userObj) => {
-    console.log("New User Connected:", userObj);
+    console.log("New User Connected:", userObj)
+    playSound("join");
     connectToNewUser(userObj, myStream);
   });
 
   socket.on("user-disconnected", (userObj) => {
-    console.log("User Disconnected:", userObj);
-    document.getElementById(`user-${userObj.streamId}`).remove();
-    console.log(peers[userObj.streamId]);
-    console.log("All peers",peers);
-    if (peers[userObj.streamId]) peers[userObj.streamId].close();
+    let pUser = document.getElementById(`user-${userObj.streamId}`)
+    if (pUser) pUser.remove();
+    if (peers[userObj.id]) peers[userObj.id].close();
+    playSound("leave");
   });
 };
 
@@ -209,6 +209,7 @@ const ExitRoom = () => {
     {
       username: displayName.value,
       streamId: myStream.id,
+      id: myPeer.id,
     },
     roomID
   );

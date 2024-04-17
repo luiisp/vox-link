@@ -56,11 +56,18 @@ io.on("connection", (socket) => {
     rooms.get(roomId).roomUsers.push(userObj);
     socket.to(roomId).emit("user-connected", userObj);
 
-    // socket.broadcast.to(roomId).emit("audioStream");
+
   });
 
   socket.on("user-disconnect", (UserObj,roomId) => {
     console.log("Client disconnected",UserObj,roomId);
+    let actualRoom = rooms.get(roomId);
+    if (!actualRoom) {
+      console.log("Room not found");
+      return;
+    }
+    const index = actualRoom.roomUsers.findIndex(user => user.id === UserObj.id);
+    actualRoom.roomUsers.splice(index, 1);
     socket.to(roomId).emit("user-disconnected", UserObj);
   });
 });
