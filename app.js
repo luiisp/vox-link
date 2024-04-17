@@ -51,12 +51,6 @@ io.on("connection", (socket) => {
     }
 
 
-
-
-    
-
-
-
     socket.join(roomId);
     io.to(socket.id).emit("room-credentials", rooms.get(roomId).roomUsers);
     rooms.get(roomId).roomUsers.push(userObj);
@@ -65,9 +59,9 @@ io.on("connection", (socket) => {
     // socket.broadcast.to(roomId).emit("audioStream");
   });
 
-  socket.on("disconnect", (roomId) => {
-    console.log("Client disconnected",roomId);
-    socket.to(roomId).emit("user-disconnected");
+  socket.on("user-disconnect", (UserObj,roomId) => {
+    console.log("Client disconnected",UserObj,roomId);
+    socket.to(roomId).emit("user-disconnected", UserObj);
   });
 });
 

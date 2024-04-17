@@ -26,10 +26,9 @@ const error = (errorMessage) => {
   }, 2500);
 };
 
-const spawnUserCard = (username) => {
+const spawnUserCard = (username, id) => {
   const userDiv = document.createElement("div");
   userDiv.classList.add(
-    "unoff",
     "user",
     "bg-[#040508]",
     "rounded-lg",
@@ -43,6 +42,7 @@ const spawnUserCard = (username) => {
     "shadow-[#080a10]",
     "shadow-sm"
   );
+  userDiv.id = `user-${id}`;
 
   const img = document.createElement("img");
   img.src = "/assets/img/default_user.jpeg";
@@ -73,10 +73,9 @@ const loading = (text = null, load) => {
 function handlerShowStream(
   stream,
   userObj = undefined,
-  audio = false,
-  destroy = false
-){
-  console.log('old conns:',oldConnUsers)
+  audio = false
+) {
+  console.log("old conns:", oldConnUsers);
   console.log("Handler Show Stream:", stream);
   if (audio) {
     audio.srcObject = stream;
@@ -86,14 +85,16 @@ function handlerShowStream(
   }
   playSound("join");
   if (!userObj && oldConnUsers != {}) {
-    console.log('dont have userObj')
+    console.log("dont have userObj");
     let streamId = stream.id;
-    console.log('possible oldConnUsers:',oldConnUsers.streamId)
-    userObj = oldConnUsers.find((user) => user.StreamId == streamId);
+    console.log("possible oldConnUsers:", oldConnUsers.streamId);
+    userObj = oldConnUsers.find((user) => user.streamId == streamId);
   }
-  spawnUserCard(userObj && userObj.username ? userObj.username : "You");
+  spawnUserCard(
+    userObj && userObj.username ? userObj.username : "You",
+    stream.id
+  );
 }
-
 
 function connectToNewUser(userObj, stream) {
   console.log("Try Connecting to New User:", userObj);
@@ -116,7 +117,7 @@ const init = async () => {
   peers = {};
   oldConnUsers = [];
   myPeer = new Peer();
-  var socket = io("/");
+  socket = io("/");
   loading((text = "Try Get Stream"), (load = true));
   navigator.mediaDevices
     .getUserMedia({
@@ -143,7 +144,7 @@ const init = async () => {
     userObj = {
       username: displayName.value,
       id: id,
-      StreamId: myStream.id,
+      streamId: myStream.id,
     };
     loading((text = "Connected"), (load = false));
     infosDiv.style.display = "none";
@@ -155,9 +156,7 @@ const init = async () => {
   });
 
   socket.on("room-credentials", (roomUsers) => {
-
     oldConnUsers = roomUsers;
-    
   });
 
   socket.on("connect", () => {
@@ -166,8 +165,8 @@ const init = async () => {
 
   socket.on("room-full", (roomComp) => {
     error("Sorry, Room is Full");
-    document.getElementById('full-div').style.display = "";
-    document.getElementById('full-count').innerHTML = `${roomComp}`;
+    document.getElementById("full-div").style.display = "";
+    document.getElementById("full-count").innerHTML = `${roomComp}`;
     infosDiv.style.display = "";
     socket.disconnect();
   });
@@ -177,9 +176,12 @@ const init = async () => {
     connectToNewUser(userObj, myStream);
   });
 
-  socket.on("user-disconnected", (userId) => {
-    console.log("User Disconnected:", userId);
-    if (peers[userId]) peers[userId].close();
+  socket.on("user-disconnected", (userObj) => {
+    console.log("User Disconnected:", userObj);
+    document.getElementById(`user-${userObj.streamId}`).remove();
+    console.log(peers[userObj.streamId]);
+    console.log("All peers",peers);
+    if (peers[userObj.streamId]) peers[userObj.streamId].close();
   });
 };
 
@@ -194,14 +196,24 @@ const joinBtnVal = () => {
   joinRoomBtn.removeEventListener("click", joinBtnVal);
   displayNameDiv.style.display = "none";
   displayNameDiv.remove();
-  window.addEventListener("beforeunload", (event) => {
-    event.preventDefault();
-    event.returnValue = "";
-  });
   addListeners();
   loading((text = "Connecting"), (load = true));
   document.getElementById("y-display-name").textContent = displayName.value;
+  window.addEventListener("beforeunload", ExitRoom);
   init();
+};
+
+const ExitRoom = () => {
+  socket.emit(
+    "user-disconnect",
+    {
+      username: displayName.value,
+      streamId: myStream.id,
+    },
+    roomID
+  );
+  document.getElementById("exit-div").style.display = "";
+  infosDiv.style.display = "";
 };
 
 const playSound = (type) => {
@@ -249,6 +261,7 @@ const muteUnmute = () => {
 
 function addListeners() {
   muteBtn.addEventListener("click", muteUnmute);
+  document.getElementById("exit-btn").addEventListener("click", ExitRoom);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
