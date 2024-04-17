@@ -50,4 +50,6 @@ No caso do Vox Link, o stream que trafega é o áudio, mas poderia ser facilment
 
 Experimente Abrir em duas diferentes janelas ou em aparelhos diferentes.
 > A conexão pode não ser estabelecida por navegadores em dispositivos móveis, como aparelhos celulares, pois eles exigem SSL.
+![voxlink](https://github.com/luiisp/vox-link/assets/115284250/7654eefd-e619-4ea4-b898-96f25bfe240a)
+
   
