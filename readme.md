@@ -1,10 +1,10 @@
 # Vox Link 🎙️🌌
-[![en](https://img.shields.io/badge/lang-en-red.svg)]()
-> Speak in English? [Access Readme.md in English]()
+[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/luiisp/vox-link/blob/main/readme.en.md)
+> Speak in English? [Access Readme.md in English](https://github.com/luiisp/vox-link/blob/main/readme.en.md)
 
 Tag this project with a star 🌟
 
-O Vox Link é uma plataforma de comunicação de voz em tempo real em que usuários podem se conectar em salas ou criar as suas próprias salas e conversar em tempo real por chamada de voz diretamente do navegador.
+O Vox Link é uma plataforma de comunicação de voz em tempo real criada e idealizada por mim, na qual usuários podem se conectar em salas ou criar as suas próprias salas e conversar em tempo real por chamada de voz diretamente do navegador.
 
 ## Como é possivel estabelecer uma chamada em tempo real entre múltiplos usuários direto pelo navegador?
 
